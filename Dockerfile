@@ -14,4 +14,4 @@ COPY . /code
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD [ "/code/.docker-entrypoint.sh" ]
+CMD [ "/code/docker-entrypoint.sh" ]
