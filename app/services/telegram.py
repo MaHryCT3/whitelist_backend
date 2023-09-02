@@ -1,5 +1,5 @@
-from app.services.http import HTTPClient
 from app.config import settings
+from app.services.http import HTTPClient
 
 
 class TelegramService(HTTPClient):
@@ -9,7 +9,7 @@ class TelegramService(HTTPClient):
 
     async def send_message(self, chat_id: int, message: str) -> None:
         await self.request(
-            f'sendMessage',
+            'sendMessage',
             'GET',
             query={'chat_id': chat_id, 'text': message},
         )

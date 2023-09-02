@@ -1,7 +1,6 @@
-from vkbottle import Bot, Token, Keyboard, Callback
-from vkbottle.bot import BotLabeler
-
 from loguru import logger
+from vkbottle import Bot, Callback, Keyboard, Token
+from vkbottle.bot import BotLabeler
 
 from app.config import settings
 from app.services.application_builder import Application

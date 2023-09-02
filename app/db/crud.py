@@ -22,6 +22,10 @@ class CRUDBase(Generic[ModelType]):
         await session.refresh(instance)
         return instance
 
+    async def remove(self, session: AsyncSession, instance: ModelType) -> None:
+        await session.delete(instance)
+        await session.commit()
+
 
 class UserCRUD(CRUDBase[User]):
     model = User
@@ -51,5 +55,3 @@ class UserCRUD(CRUDBase[User]):
     async def create(self, session: AsyncSession, telegram_id: int, steamid: str) -> User:
         user = self.model(id=None, telegram_id=telegram_id, steamid=steamid)
         return await self.save(session, user)
-
-

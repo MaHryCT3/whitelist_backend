@@ -1,13 +1,12 @@
 from vkbottle import GroupEventType
 from vkbottle.bot import BotLabeler, MessageEvent
+
 from app.db.crud import UserCRUD
-
-from app.services.vk_bot.rules import PydanticPayloadRule
-from app.services.vk_bot.payloads import ApproveApplicationPayload, DeclineApplicationPayload
-from app.db.tables.choices import ApprovalStatusChoices
 from app.db.session import SessionLocal
+from app.db.tables.choices import ApprovalStatusChoices
 from app.services.telegram import TelegramService
-
+from app.services.vk_bot.payloads import ApproveApplicationPayload, DeclineApplicationPayload
+from app.services.vk_bot.rules import PydanticPayloadRule
 
 APPROVE_TEXT_MESSAGE: str = 'Поздравляю, Ваша заявка была одобрена!'
 DENIED_TEXT_MESSAGE: str = 'К сожалению, Ваша заявка была отклонена.'

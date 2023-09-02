@@ -1,10 +1,10 @@
-from fastapi import APIRouter, Depends, Response, HTTPException, status, BackgroundTasks
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Response, status
 from loguru import logger
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.api.deps import get_session
 from app.db.crud import UserCRUD
 from app.services.application_builder import ApplicationBuilder
-from app.api.deps import get_session
 from app.services.vk_bot.bot import whitelist_bot
 
 application_router = APIRouter(prefix='/application')
