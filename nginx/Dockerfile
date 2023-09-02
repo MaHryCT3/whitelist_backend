@@ -1,3 +1,4 @@
-FROM nginx:latest
+FROM nginx:1.22.0
 
-COPY ./nginx/backend.conf /etc/nginx/conf.d/backend.conf
+RUN rm /etc/nginx/conf.d/default.conf
+COPY ./docker/nginx/nginx.conf /etc/nginx/conf.d
