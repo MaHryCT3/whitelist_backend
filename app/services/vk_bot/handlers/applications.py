@@ -24,7 +24,7 @@ async def approve_application(event: MessageEvent, payload: ApproveApplicationPa
     user_crud = UserCRUD()
 
     async with SessionLocal() as session:
-        user = await user_crud.update_approval_status(session, payload.approve_application_user_id, ApprovalStatusChoices.SUCCESS)
+        user = await user_crud.update_approval_status(session, payload.approve_application_user_id, ApprovalStatusChoices.APPROVED)
 
     message_id = event.conversation_message_id
     await event.show_snackbar('Заявка одобрена')
