@@ -1,6 +1,8 @@
 CONTAINER = 'bot'
 TAIL = 100
 
+dev:
+	uvicorn app:app --port 80 --host 0.0.0.0 --reload
 build:
 	docker compose -f docker-compose.yml build
 up:

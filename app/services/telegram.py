@@ -7,9 +7,9 @@ class TelegramService(HTTPClient):
 
     BASE_URL = f'https://api.telegram.org/bot{API_TOKEN}/'
 
-    async def send_message(self, chat_id: int, message: str) -> None:
+    async def send_message(self, chat_id: int, message: str, parse_mode: 'str' = 'HTML') -> None:
         await self.request(
             'sendMessage',
             'GET',
-            query={'chat_id': chat_id, 'text': message},
+            query={'chat_id': chat_id, 'text': message, 'parse_mode': parse_mode},
         )

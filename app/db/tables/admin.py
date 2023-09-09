@@ -9,4 +9,3 @@ class Admin(BaseDeclarative):
 
     id: Mapped[intpk]
     vk_id: Mapped[int] = mapped_column(BigInteger, unique=True)
-

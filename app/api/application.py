@@ -12,7 +12,12 @@ application_router = APIRouter(prefix='/application')
 
 @application_router.post('/')
 async def application_create(
-    telegram_id: int, telegram_username: str, steamid: str, *, session: AsyncSession = Depends(get_session), background_task: BackgroundTasks
+    telegram_id: int,
+    telegram_username: str,
+    steamid: str,
+    *,
+    session: AsyncSession = Depends(get_session),
+    background_task: BackgroundTasks,
 ) -> Response:
     logger.info(f'Новая заявка telegram_id: {telegram_id}, steamid: {steamid}')
     user_crud = UserCRUD()
@@ -30,7 +35,3 @@ async def application_create(
 
     background_task.add_task(whitelist_bot.send_application, application, new_user.id)
     return Response(status_code=status.HTTP_201_CREATED)
-
-
-
-

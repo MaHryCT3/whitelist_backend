@@ -47,7 +47,9 @@ class UserCRUD(CRUDBase[User]):
         result = result.first()
         return result[0] if result else None
 
-    async def update_approval_status(self, session: AsyncSession, id: int, approval_status: ApprovalStatusChoices) -> User:
+    async def update_approval_status(
+        self, session: AsyncSession, id: int, approval_status: ApprovalStatusChoices
+    ) -> User:
         instance = await self.get(session, id)
         instance.approval_status = approval_status
         return await self.save(session, instance)
@@ -55,3 +57,10 @@ class UserCRUD(CRUDBase[User]):
     async def create(self, session: AsyncSession, telegram_id: int, steamid: str) -> User:
         user = self.model(id=None, telegram_id=telegram_id, steamid=steamid)
         return await self.save(session, user)
+
+    async def get_for_alert_notifications(self, session: AsyncSession) -> list[int]:
+        statement = select(self.model).filter(
+            self.model.alert_notifications == True, self.model.approval_status == ApprovalStatusChoices.APPROVED
+        )
+        results = await session.execute(statement)
+        return [result[0].telegram_id for result in results]
