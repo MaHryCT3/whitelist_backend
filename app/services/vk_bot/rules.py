@@ -21,7 +21,7 @@ class CommandRule(rules.ABCRule[rules.BaseMessageMin]):
     async def check(self, event: rules.BaseMessageMin) -> dict | bool:
         no_prefix = event.text.removeprefix('/')
         if no_prefix.startswith(self.command_text):
-            no_command = self.command_text.removeprefix(self.command_text + ' ')
+            no_command = no_prefix.removeprefix(self.command_text + ' ')
             return {'args': no_command}
         else:
             return False
