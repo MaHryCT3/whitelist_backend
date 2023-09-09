@@ -3,6 +3,7 @@ from typing import Final
 
 from loguru import logger
 from vkbottle.bot import BotLabeler, Message
+from app.services.vk_bot.rules import CommandRule
 
 from app.db.crud import UserCRUD
 from app.db.session import SessionLocal
@@ -14,8 +15,8 @@ MESSAGES_PER_SECOND: Final[int] = 20
 notifications_labeler = BotLabeler()
 
 
-@notifications_labeler.message(text='/notify <notify_message>')
-async def send_notification(message: Message, notify_message: str) -> None:
+@notifications_labeler.message(CommandRule('notify'))
+async def send_notification(message: Message, args: str) -> None:
     async with SessionLocal() as session:
         users = await UserCRUD().get_for_alert_notifications(session)
 
@@ -25,7 +26,7 @@ async def send_notification(message: Message, notify_message: str) -> None:
         users_slice = users[i : i + MESSAGES_PER_SECOND]
         for user in users_slice:
             try:
-                await telegram.send_message(user, notify_message)
+                await telegram.send_message(user, args)
             except Exception as e:
                 logger.error(f'Error while sending notification to {user}: {e}')
 
