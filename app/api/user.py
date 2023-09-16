@@ -25,3 +25,10 @@ async def steamid_exist(steamid: str, *, session: AsyncSession = Depends(get_ses
         return Response(status_code=status.HTTP_200_OK)
     else:
         return Response(status_code=status.HTTP_404_NOT_FOUND)
+
+
+@user_router.get('/approved')
+async def get_approved(*, session: AsyncSession = Depends(get_session)) -> list[str]:
+    user_crud = UserCRUD()
+    approved = await user_crud.get_whitelist_steamids(session)
+    return approved
