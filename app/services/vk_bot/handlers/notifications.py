@@ -9,7 +9,7 @@ from app.db.crud import UserCRUD
 from app.db.session import SessionLocal
 from app.services.telegram import TelegramService
 
-MESSAGES_PER_SECOND: Final[int] = 20
+MESSAGES_PER_SECOND: Final[int] = 35
 
 
 notifications_labeler = BotLabeler()

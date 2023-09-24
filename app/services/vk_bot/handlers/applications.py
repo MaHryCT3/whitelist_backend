@@ -9,7 +9,7 @@ from app.services.vk_bot.payloads import ApproveApplicationPayload, DeclineAppli
 from app.services.vk_bot.rules import PydanticPayloadRule
 
 ERROR_TEXT_BEFORE_MESSAGE: str = 'Произошла ошибка.'
-APPROVE_TEXT_MESSAGE: str = 'Поздравляю, Ваша заявка была одобрена!'
+APPROVE_TEXT_MESSAGE: str = 'Поздравляю, Ваша заявка была одобрена!\n\nДоступ к серверу будет выдан через 15 минут.'
 DENIED_TEXT_MESSAGE: str = 'К сожалению, Ваша заявка была отклонена.'
 
 application_labeler = BotLabeler()
