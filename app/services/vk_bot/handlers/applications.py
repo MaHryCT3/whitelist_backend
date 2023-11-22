@@ -9,7 +9,9 @@ from app.services.vk_bot.payloads import ApproveApplicationPayload, DeclineAppli
 from app.services.vk_bot.rules import PydanticPayloadRule
 
 ERROR_TEXT_BEFORE_MESSAGE: str = 'Произошла ошибка.'
-APPROVE_TEXT_MESSAGE: str = 'Поздравляю, Ваша заявка была одобрена!\n\nДоступ к серверу будет выдан через 15 минут.'
+APPROVE_TEXT_MESSAGE: str = ('Поздравляю, Ваша заявка была одобрена!'
+                             '\n\nДоступ к серверу будет выдан через 15 минут.'
+                             '\n\n<code>connect 185.207.214.181:10000</code>')
 DENIED_TEXT_MESSAGE: str = 'К сожалению, Ваша заявка была отклонена.'
 
 application_labeler = BotLabeler()
@@ -62,7 +64,7 @@ async def approve_application_by_telegram_id(message: Message, steamid: str):
         await user_crud.update_approval_status(session, user.id, ApprovalStatusChoices.APPROVED)
 
     await send_notification_to_telegram(user.telegram_id, f'{ERROR_TEXT_BEFORE_MESSAGE} {APPROVE_TEXT_MESSAGE}')
-    await message.reply('Заявка одобрена')
+    # await message.reply('Заявка одобрена')
 
 
 @application_labeler.message(text='/denied <steamid>')
